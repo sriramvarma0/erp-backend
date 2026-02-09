@@ -19,3 +19,20 @@ CREATE TABLE user_roles (
     CONSTRAINT fk_user FOREIGN KEY (user_id) REFERENCES users(id),
     CONSTRAINT fk_role FOREIGN KEY (role_id) REFERENCES roles(id)
 );
+
+CREATE TABLE permissions (
+    id BIGSERIAL PRIMARY KEY,
+    name VARCHAR(100) UNIQUE NOT NULL,
+    description VARCHAR(255)
+);
+
+CREATE TABLE role_permissions (
+    role_id BIGINT NOT NULL,
+    permission_id BIGINT NOT NULL,
+    PRIMARY KEY (role_id, permission_id),
+    CONSTRAINT fk_role_perm FOREIGN KEY (role_id) REFERENCES roles(id),
+    CONSTRAINT fk_perm_role FOREIGN KEY (permission_id) REFERENCES permissions(id)
+);
+
+
+
